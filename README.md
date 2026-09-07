@@ -13,6 +13,7 @@
 > | Bring up the whole platform (both repos) from a fresh clone | [`../agentic-str/docs/SETUP.md`](../agentic-str/docs/SETUP.md) — **the canonical path** |
 > | Work on this fork alone (images, external Postgres, RSpec, Rails commands) | [`docs/fork/DEV_SETUP.md`](./docs/fork/DEV_SETUP.md) |
 > | Understand what was changed vs upstream, and why | [`docs/fork/README.md`](./docs/fork/README.md) · [`docs/fork/UPSTREAM_DIFF.md`](./docs/fork/UPSTREAM_DIFF.md) |
+> | Deploy this fork to production | `docker-compose.prod.yaml` (added in fork PR #25), driven from [`../agentic-str/docs/operations/single-vps-deployment.md`](../agentic-str/docs/operations/single-vps-deployment.md). ⚠ **Not `docker-compose.production.yaml`** — that one runs upstream `chatwoot/chatwoot:latest` with **none** of the `custom/` overlay. The three prod-shaped compose files are told apart in [`docs/fork/DEV_SETUP.md`](./docs/fork/DEV_SETUP.md) §7. |
 > | Debug a first-run failure | [`docs/fork/error-log/`](./docs/fork/error-log/README.md) — grep it *before* debugging |
 >
 > **Clone this repo into a directory named `mesh-crm`.** Compose derives its

@@ -5,7 +5,42 @@ Chatwoot fork into the conversation layer of a multi-tenant SaaS (quota
 enforcement, AI reply loop, white-label) **without breaking any upstream
 Chatwoot API or webhook contract**.
 
-## Status at a glance (2026-07-04)
+## Status at a glance (re-anchored 2026-09-07, through fork PR **#27**)
+
+> ⚠ **This heading read `(2026-07-04)` for two months and twenty-three merged PRs**
+> (derived: `gh pr list --state merged` filtered on `mergedAt > 2026-07-04`).
+> Everything in the bullet list below was still true — the rot was by
+> **omission**, which no diff range reveals. What shipped after that date and
+> had no line here:
+>
+> - **A Facebook Page now belongs to exactly one account, platform-wide**
+>   (#24) — `UNIQUE (page_id)` on `channel_facebook_pages`
+>   (`20260830120000_make_channel_facebook_pages_page_id_globally_unique`,
+>   `spec/custom/models/channel_facebook_page_global_uniqueness_spec.rb`).
+>   ⚠ **`db/schema.rb` is this fork's one real upstream-merge conflict**
+>   ([UPSTREAM_SYNC.md](./UPSTREAM_SYNC.md)) — re-check that the index
+>   survived after **every** sync, because losing it is silent.
+> - **Super-admin MFA enforcement** behind `SUPER_ADMIN_ENFORCE_MFA` (#19),
+>   plus four super-admin gaps and reply authority for automations and
+>   campaigns (#20).
+> - **WhatsApp cloud webhooks are signature-verified** once the installation
+>   has a secret (#22).
+> - **The brand *assets* stopped being Chatwoot's** (#23). The white-label
+>   bullet below is about copy and config and is unchanged — but the
+>   `brand-assets/*.svg` wordmark, the favicon/PWA icon set and
+>   `manifest.json` still carried Chatwoot's own mark on the one page every
+>   operator sees first. "Not-code remaining" below was narrowed to the
+>   config values in the same PR. Re-verified and recorded in #21.
+> - **A production compose that runs THE FORK** against Neon (#25):
+>   `docker-compose.prod.yaml`. ⚠ **`docker-compose.production.yaml` is a
+>   different file that runs upstream Chatwoot with none of `custom/`** —
+>   there are three prod-shaped compose files and #26 exists because the
+>   docs named two. [DEV_SETUP.md](./DEV_SETUP.md) §7 tells them apart.
+> - **Upstream sync** to `develop` 2026-08-18, 57 commits including security
+>   fixes (#16).
+>
+> Derive the high-water mark with `gh pr list --state merged --limit 1`.
+> Do not read it from this line.
 
 **Code-complete.** Every phase's code is shipped in the `custom/` overlay;
 `spec/custom` is green. What's built:
